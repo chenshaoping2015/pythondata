@@ -1,14 +1,14 @@
 import pymysql
 
 
-def test_mysqlConnect(db=None):
+def test_mysqlConnect():
     config = {
         'host': '192.168.2.46',
         'port': 3309,
         'user': 'root',
         'passwd': '123456',
         'charset': 'utf8',
-        'database': db
+        'database': 'platform'
     }
     conn = pymysql.connect(**config)
     cursor = conn.cursor()
@@ -18,8 +18,11 @@ def test_mysqlConnect(db=None):
 
 def test_queryRand(db = None,key=None, table=None, **kwargs):
     # 查询结果随机一条数据操作
-    conn = mysqlConnect(db)
-    ct = json2str(kwargs)
-    sql = f"""SELECT {key} FROM {db}.{table} WHERE  {ct} order by rand() limit 1"""
-    query = conn.select(sql)
+    conn = test_mysqlConnect()
+    sql = f"""SELECT {key} FROM {db}.{table} order by rand() limit 1"""
+    query = conn.excute(sql)
     return query[0][0]
+
+def test_category_brand():
+    category_brand = test_queryRand('platform','code', 't_brand')
+    return category_brand[0][0]
