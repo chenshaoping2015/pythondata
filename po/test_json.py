@@ -1,4 +1,5 @@
 import json
+import time
 
 '''
 json：是一种数据格式，是纯字符串。可以被解析成python的dict或其他形式。
@@ -21,16 +22,16 @@ data = {
     'shares': 100,
     'price': 542.23
 }
-def test_dict2json(data=None):
+def test_dict2json():
     # 将字典转换为json格式
     datajson = json.dumps(data)
     # print(type(data))
     print(type(datajson))
-    return  datajson
+    return datajson
     # 查看json格式数据
 
 
-def test_json2dict(data=None):
+def test_json2dict():
     data_orgin ={"name": "Bill", "info": {"sex": "male", "age": 29, "birth": "19900506"}}
     data_json2 = json.dumps(data_orgin)
     print(type(data_json2))
@@ -70,3 +71,5 @@ def test_json():
     data = json.loads(json_data)
     for v in data['favourite']['bkmrk'].values():
         print("%s;%s" % (v['lcate'], v['guid']))
+
+
